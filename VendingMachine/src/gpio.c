@@ -8,8 +8,6 @@
 
 struct device *gpio0_init()
 {
-  #define GPIO0_NID DT_NODELABEL(gpio0)                       // Get the gpio0 identifier from the device tree
-  #define GPIO0_LABEL DT_LABEL(GPIO0_NID)                     // Get the gpio0 label from the device tree
 
   struct device *gpio0_dev;                                    // Pointer to GPIO device structure
 
