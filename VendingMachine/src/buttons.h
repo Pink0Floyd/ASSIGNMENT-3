@@ -5,7 +5,7 @@
 * This module implements the functions to initialize and use the built in board buttons
 * \author Filipe Loureiro & Miguel Silva
 * \date 26/04/22
-* \version 0.2
+* \version 1.0
 * \bug Currently under tests, and continuous updating
 */
 
@@ -16,23 +16,26 @@
 #ifndef _BUTTONS_H
 #define _BUTTONS_H
 
-#include "base.h""
+#include "base.h"
 
 static int buttons_pin[4]={BUTTON1,BUTTON2,BUTTON3,BUTTON4};                  // Buttons data with pins numbers             
 static int buttons_pos[4]={1,2,4,8};                                          // Buttons data with corresponding position 
 
-/*
+
+//static struct gpio_callback but1_cb_data;                                     // Callback structure related to BUTTON 1
+//volatile int but1_Flag = 0;                                                   // Callback variable, flag to signal a BUTTON 1 press 
+
+
 static struct gpio_callback but1_cb_data;                                     // Callback structure related to BUTTON 1
 static struct gpio_callback but2_cb_data;                                     // Callback structure related to BUTTON 2
 static struct gpio_callback but3_cb_data;                                     // Callback structure related to BUTTON 3
 static struct gpio_callback but4_cb_data;                                     // Callback structure related to BUTTON 4
 
-volatile int but1_Flag = 0;                                                   // Callback variable, flag to signal a BUTTON 1 press 
-volatile int but2_Flag = 0;                                                   // Callback variable, flag to signal a BUTTON 2 press 
-volatile int but3_Flag = 0;                                                   // Callback variable, flag to signal a BUTTON 3 press 
-volatile int but4_Flag = 0;                                                   // Callback variable, flag to signal a BUTTON 4 press 
+static int but1_Flag = 0;                                                   // Callback variable, flag to signal a BUTTON 1 press
+static int but2_Flag = 0;                                                   // Callback variable, flag to signal a BUTTON 2 press 
+static int but3_Flag = 0;                                                   // Callback variable, flag to signal a BUTTON 3 press 
+static int but4_Flag = 0;                                                   // Callback variable, flag to signal a BUTTON 4 press 
 
-*/
 
 ///////////////////////////////////////////////////////////////////////////////////////
 //  Public Functions:
@@ -72,6 +75,6 @@ void buttons_init_(struct device *gpio0_dev, char n_buttons, char c);
 ///////////////////////////////////////////////////////////////////////////////////////
 //  Private Functions:
 
-void struct_init();
+void buttons_callback_init(struct device *gpio0_dev,char n_buttons);
 
 #endif

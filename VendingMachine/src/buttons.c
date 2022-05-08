@@ -1,5 +1,31 @@
 #include "buttons.h"
 
+// Calback Functions:
+void but1_cbfunction(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
+ {
+      printk("Button 1 pressed\n\r");								      // Inform that button was hit
+      but1_Flag=1;										      // Update Flag                                           
+ } 
+
+ void but2_cbfunction(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
+ {
+      printk("Button 2 pressed\n\r");								      // Inform that button was hit
+      but2_Flag=1;										      // Update Flag 
+ } 
+
+ void but3_cbfunction(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
+ {
+      printk("Button 3 pressed\n\r");								      // Inform that button was hit
+      but3_Flag=1;										      // Update Flag 
+ } 
+
+ void but4_cbfunction(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
+    {
+      printk("Button 4 pressed\n\r");								      // Inform that button was hit
+      but4_Flag=1;										      // Update Flag 
+    } 
+
+
 void buttons_init(struct device *gpio0_dev, char n_buttons)                                     // Initialize the board's buttons  
 {
   int i=0;
@@ -19,7 +45,6 @@ void buttons_init(struct device *gpio0_dev, char n_buttons)                     
     }
   }
 }
-
 
 void buttons_init_(struct device *gpio0_dev, char n_buttons, char c)
 {
@@ -75,57 +100,57 @@ void buttons_init_(struct device *gpio0_dev, char n_buttons, char c)
       }
     }
   }
-
+      buttons_callback_init(gpio0_dev, n_buttons);
 }
 
 
-// Several Buttons Callbacks, that are necessary for good interrupt use
+void buttons_callback_init(struct device *gpio0_dev, char n_buttons)
+{
+      if((n_buttons & 1) == 1)
+      {
+	    gpio_init_callback(&but1_cb_data, but1_cbfunction, BIT(BUTTON1));
+	    gpio_add_callback(gpio0_dev, &but1_cb_data);
+      }
+      if((n_buttons & 2) == 2)
+      {
+	    gpio_init_callback(&but2_cb_data, but2_cbfunction, BIT(BUTTON2));
+	    gpio_add_callback(gpio0_dev, &but2_cb_data);
+      }
+      if((n_buttons & 4) == 4)
+      {
+	    gpio_init_callback(&but3_cb_data, but3_cbfunction, BIT(BUTTON3));
+	    gpio_add_callback(gpio0_dev, &but3_cb_data);
+      }
+      if((n_buttons & 8) == 8)
+      {
+	    gpio_init_callback(&but4_cb_data, but4_cbfunction, BIT(BUTTON4));
+	    gpio_add_callback(gpio0_dev, &but4_cb_data);
+      }
+}
+
+
 /*
+// Several Buttons Callbacks, that are necessary for good interrupt use
+
     // Set Button 1 callback 
     gpio_init_callback(&but1_cb_data, but1_cbfunction, BIT(BUTTON1));
     gpio_add_callback(gpio0_dev, &but1_cb_data);
-
-    void but1_cbfunction(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
-    {
-      printk("Button 1 pressed\n\r");                                                               // Inform that button was hit
-      but1_Flag = 1;                                                                                // Update Flag                                           
-    } 
-    
 
     // Set Button 2 callback 
     gpio_init_callback(&but2_cb_data, but2_cbfunction, BIT(BUTTON2));
     gpio_add_callback(gpio0_dev, &but2_cb_data);
 
-    void but2_cbfunction(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
-    {
-      printk("Button 2 pressed\n\r");                                                               // Inform that button was hit
-      but2_Flag = 1;                                                                                // Update Flag 
-    } 
-
-
     // Set Button 3 callback 
     gpio_init_callback(&but3_cb_data, but3_cbfunction, BIT(BUTTON3));
     gpio_add_callback(gpio0_dev, &but3_cb_data);
 
-    void but3_cbfunction(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
-    {
-      printk("Button 3 pressed\n\r");                                                               // Inform that button was hit
-      but3_Flag = 1;                                                                                // Update Flag 
-    } 
-
-
     // Set Button 4 callback 
     gpio_init_callback(&but4_cb_data, but4_cbfunction, BIT(BUTTON4));
     gpio_add_callback(gpio0_dev, &but4_cb_data);
-
-    void but4_cbfunction(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
-    {
-      printk("Button 4 pressed\n\r");                                                               // Inform that button was hit
-      but4_Flag = 1;                                                                                // Update Flag 
-    } 
  
  */
   
+/*
 void button1_init(struct device *gpio0_dev)                                                         // Button 1                 
 {
   int ret=0;
@@ -176,3 +201,4 @@ void button4_init(struct device *gpio0_dev)                                     
     return;
   }
 }
+*/
