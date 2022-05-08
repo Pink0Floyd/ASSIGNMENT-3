@@ -3,8 +3,8 @@
 * \brief This file contain the basic includes and variables for general porpouse
 *
 * \author Filipe Loureiro & Miguel Silva
-* \date 25/04/22
-* \version 0.2
+* \date 08/05/22
+* \version 1.0
 * \bug Currently under tests, and continuous updating
 */
 
@@ -20,6 +20,7 @@
 #include <string.h>
 #include <timing/timing.h>
 #include <stdio.h>
+#include <stdint.h>
 
 #define LED1 13                                             // LED1 pin number of GPIO_0
 #define LED2 14                                             // LED2 pin number of GPIO_0
