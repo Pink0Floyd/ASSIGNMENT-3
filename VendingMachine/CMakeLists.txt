@@ -5,4 +5,6 @@ find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 project(VendingMachine)
 
 target_sources(app PRIVATE src/main.c)
-
+target_sources(app PRIVATE src/gpio.c)
+target_sources(app PRIVATE src/leds.c)
+target_sources(app PRIVATE src/buttons.c)

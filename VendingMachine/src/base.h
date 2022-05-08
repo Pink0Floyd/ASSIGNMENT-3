@@ -4,7 +4,7 @@
 *
 * \author Filipe Loureiro & Miguel Silva
 * \date 08/05/22
-* \version 1.0
+* \version 1.1
 * \bug Currently under tests, and continuous updating
 */
 
@@ -31,5 +31,9 @@
 #define BUTTON2 12                                          // BUTTON2 pin number of GPIO_0
 #define BUTTON3 24                                          // BUTTON3 pin number of GPIO_0
 #define BUTTON4 25                                          // BUTTON4 pin number of GPIO_0
+#define BUTTON4 28                                          // BUTTON5 pin number of GPIO_0
+#define BUTTON4 29                                          // BUTTON6 pin number of GPIO_0
+#define BUTTON4 30                                          // BUTTON7 pin number of GPIO_0
+#define BUTTON4 31                                          // BUTTON8 pin number of GPIO_0
 
 #endif
