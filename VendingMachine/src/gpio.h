@@ -13,13 +13,11 @@
 * This module will suffer many updates due to the newness that this board brings to us
 */
 
+
 #ifndef _GPIO_H
 #define _GPIO_H
 
 #include "base.h"
-
-#define GPIO0_NID DT_NODELABEL(gpio0)                       // Get the gpio0 identifier from the device tree
-#define GPIO0_LABEL DT_LABEL(GPIO0_NID)                     // Get the gpio0 label from the device tree
 
 ///////////////////////////////////////////////////////////////////////////////////////
 //  Public Functions:
