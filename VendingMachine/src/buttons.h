@@ -5,7 +5,7 @@
 * This module implements the functions to initialize and use the built in board buttons
 * \author Filipe Loureiro & Miguel Silva
 * \date 26/04/22
-* \version 1.1
+* \version 1.2
 * \bug Currently under tests, and continuous updating
 */
 
@@ -18,8 +18,19 @@
 
 #include "base.h"
 
-const int buttons_pin[4]={BUTTON1,BUTTON2,BUTTON3,BUTTON4,BUTTON5,BUTTON6,BUTTON7,BUTTON8};     // Buttons data with pins numbers             
-const int buttons_pos[4]={1,2,4,8,16,32,64,128};						// Buttons data with corresponding position 
+#define BUTTON1 11                                          // BUTTON1 pin number of GPIO_0
+#define BUTTON2 12                                          // BUTTON2 pin number of GPIO_0
+#define BUTTON3 24                                          // BUTTON3 pin number of GPIO_0
+#define BUTTON4 25                                          // BUTTON4 pin number of GPIO_0
+#define BUTTON5 03					    // BUTTON5 pin number of GPIO_0
+#define BUTTON6 04					    // BUTTON6 pin number of GPIO_0
+#define BUTTON7 28                                          // BUTTON7 pin number of GPIO_0
+#define BUTTON8 29                                          // BUTTON8 pin number of GPIO_0
+
+#define N_BUTTONS 8					    // Number of buttons
+
+const static int buttons_pin[8]={BUTTON1,BUTTON2,BUTTON3,BUTTON4,BUTTON5,BUTTON6,BUTTON7,BUTTON8};     // Buttons data with pins numbers             
+const static int buttons_pos[8]={1,2,4,8,16,32,64,128};						      // Buttons data with corresponding position 
 
 static struct gpio_callback but1_cb_data;                                     // Callback structure related to BUTTON 1
 static struct gpio_callback but2_cb_data;                                     // Callback structure related to BUTTON 2

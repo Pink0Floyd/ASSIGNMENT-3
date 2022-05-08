@@ -56,7 +56,7 @@ void buttons_init(struct device *gpio0_dev, char n_buttons)                     
   int i=0;
   int ret=0;
 
-  for(i=0; i<4; i++)
+  for(i=0; i<N_BUTTONS; i++)
   {
     //printk("%d\n\r",buttons_pos[i]);
     if((n_buttons & buttons_pos[i]) == buttons_pos[i])
@@ -75,16 +75,17 @@ void buttons_init(struct device *gpio0_dev, char n_buttons)                     
 void buttons_init_(struct device *gpio0_dev, char n_buttons, char c)
 {
   buttons_init(gpio0_dev,n_buttons);
+  printk("Inicializar interrupts\n\r");
   int ret=0;
   int i=0;
     
   if((c=='H') || (c='h'))                                                                           // Rising edge interrupt configuration
   {
-    for(i=0; i<4; i++)
+    for(i=0; i<N_BUTTONS; i++)
     {
-      printk("%d\n\r",buttons_pos[i]);
       if((n_buttons & buttons_pos[i]) == buttons_pos[i])
       {
+        printk("%d\n\r",buttons_pos[i]);
         ret=gpio_pin_interrupt_configure(gpio0_dev, buttons_pin[i], GPIO_INT_EDGE_TO_ACTIVE);         // Button rising edge interrupt configuration 
         if (ret < 0)                                                                                  // In case of fail initialization and consequent error message
         { 
@@ -96,7 +97,7 @@ void buttons_init_(struct device *gpio0_dev, char n_buttons, char c)
   }
   else if((c=='L') || (c='l'))                                                                        // Falling edge interrupt configuration
   {
-    for(i=0; i<4; i++)
+    for(i=0; i<N_BUTTONS; i++)
     {
       //printk("%d\n\r",buttons_pos[i]);
       if((n_buttons & buttons_pos[i]) == buttons_pos[i])
@@ -112,7 +113,7 @@ void buttons_init_(struct device *gpio0_dev, char n_buttons, char c)
   }
   else if((c=='B') || (c='b'))                                                                        // Rising and falling edge interrupt configuration
   {
-    for(i=0; i<4; i++)
+    for(i=0; i<N_BUTTONS; i++)
     {
       //printk("%d\n\r",buttons_pos[i]);
       if((n_buttons & buttons_pos[i]) == buttons_pos[i])
@@ -167,7 +168,7 @@ void buttons_callback_init(struct device *gpio0_dev, char n_buttons)
 	    gpio_init_callback(&but7_cb_data, but7_cbfunction, BIT(BUTTON7));
 	    gpio_add_callback(gpio0_dev, &but7_cb_data);
       }
-      if((n_buttons & 128) == 8)
+      if((n_buttons & 128) == 128)
       {
 	    gpio_init_callback(&but8_cb_data, but8_cbfunction, BIT(BUTTON8));
 	    gpio_add_callback(gpio0_dev, &but8_cb_data);
