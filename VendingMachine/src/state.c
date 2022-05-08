@@ -4,9 +4,64 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Private Member Functions
 
+int up_subevent()
+{
+	
+}
+
+int down_subevent()
+{
+	
+}
+
+int EUD_event()
+{
+	
+}
+
+int sel_event()
+{
+	
+}
+
+int ret_event()
+{
+	
+}
+
+int e10_subevent()
+{
+
+}
+
+int e20_subevent()
+{
+
+}
+
+int e50_subevent()
+{
+
+}
+
+int e100_subevent()
+{
+
+}
+
+int EX_event()
+{
+	
+}
+
 int credit_state()
 {
 	int next_state=0;
+	
+	while(1)
+	{
+		if(
+	}
 
 	return next_state;
 }
@@ -20,42 +75,42 @@ int browse_state()
 
 int printerror_substate()
 {
-	int next_state=0;
+	int next_state=CREDIT;
 
 	return next_state;
 }
 
 int return_substate()
 {
-	int next_state=0;
+	int next_state=DISPLAY_CREDIT;
 
 	return next_state;
 }
 
 int displaycredit_substate()
 {
-	int next_state=0;
+	int next_state=CREDIT;
 
 	return next_state;
 }
 
 int money_substate()
 {
-	int next_state=0;
+	int next_state=DISPLAY_CREDIT;
 
 	return next_state;
 }
 
 int displayprod_substate()
 {
-	int next_state=0;
+	int next_state=BROWSE;
 
 	return next_state;
 }
 
 int outprod_subtate()
 {
-	int next_state=0;
+	int next_state=DISPLAY_CREDIT;
 
 	return next_state;
 }
@@ -63,7 +118,7 @@ int outprod_subtate()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Public Member Function
 
-void state_machine(int state)
+int state_machine(int state)
 {
 	switch(state)
 	{
@@ -90,6 +145,9 @@ void state_machine(int state)
 			break;
 		case OUT_PROD:
 			outprod_substate();
+			break;	
+		default:
+			printk("STATE NOT FOUND\n");
 			break;
 	}
 }

@@ -6,7 +6,7 @@
 * This module implements the functions run the main state machine
 * \author Filipe Loureiro & Miguel Silva
 * \date 08/05/22
-* \version 1.1
+* \version 1.2
 * \bug No bugs found
 */
 
