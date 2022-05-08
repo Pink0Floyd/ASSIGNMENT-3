@@ -18,8 +18,9 @@ void read_events()
 
 int cred_state()
 {
+	printk("CRED: %f credit available\n",money);
+
 	int next_state=NO_STATE;
-	
 	while(next_state==NO_STATE)
 	{
 		read_events();
@@ -59,9 +60,23 @@ int cred_state()
 
 int browse_state()
 {
-	int next_state=NO_STATE;
-	float cost=0;
+	switch(product%N_PROD)
+	{
+		case COFFEE:
+			printk("BROWSE: Selected a Coffee\n");
+			break;
+		case TUNA:
+			printk("BROWSE: Selected a Tuna Sandwich\n");
+			break;
+		case BEER:
+			printk("BROWSE: Selected a Beer\n");
+			break;
+		default:
+			printk("BROWSE: Selected an Unknown Product\n");
+			break;
+	}
 
+	int next_state=NO_STATE;
 	while(next_state==NO_STATE)
 	{
 		read_events();
@@ -129,23 +144,19 @@ int error_substate()
 			break;
 	}
 
-	return next_state;
+	return CRED;
 }
 
 int return_substate()
 {
-	int next_state=DISP_CREDIT;
-
 	printk("RETURN: Returned %f euros to the user\n",money);
 	money=0;
 
-	return next_state;
+	return CRED;
 }
 
 int money_substate()
 {
-	int next_state=DISP_CREDIT;
-
 	if(e10!=0)
 	{
 		printk("MONEY: Increased credit by 10 cents\n");
@@ -167,13 +178,11 @@ int money_substate()
 		money+=1.0;
 	}
 
-	return next_state;
+	return CRED;
 }
 
 int changeprod_substate()
 {
-	int next_state=BROWSE;
-
 	if(up!=0)
 	{
 		printk("CHANGE_PROD: Next prod\n");
@@ -185,13 +194,11 @@ int changeprod_substate()
 		product--;
 	}
 
-	return next_state;
+	return BROWSE;
 }
 
 int outprod_subtate()
 {
-	int next_state=DISP_CREDIT;
-
 	switch(product%N_PROD)
 	{
 		case COFFEE:
@@ -208,7 +215,7 @@ int outprod_subtate()
 			break;
 	}
 
-	return next_state;
+	return CRED;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -216,34 +223,32 @@ int outprod_subtate()
 
 int state_machine(int state)
 {
+	int next_state=NO_STATE;
 	switch(state)
 	{
 		case CREDIT:
-			credit_state();
+			next_state=credit_state();
 			break;
 		case BROWSE:
-			browse_state();
+			next_state=browse_state();
 			break;
 		case PRINT_ERROR:
-			printerror_substate();
+			next_state=printerror_substate();
 			break;
 		case RETURN:
-			return_substate();
-			break;
-		case DISPLAY_CREDIT:
-			displaycredit_substate();
+			next_state=return_substate();
 			break;
 		case MONEY:
-			money_substate();
+			next_state=money_substate();
 			break;
 		case DISPLAY_PROD:
-			displayprod_substate();
+			next_state=displayprod_substate();
 			break;
 		case OUT_PROD:
-			outprod_substate();
+			next_state=outprod_substate();
 			break;	
 		default:
-			printk("STATE NOT FOUND\n");
+			printk("Unknown State\n");
 			break;
 	}
 }

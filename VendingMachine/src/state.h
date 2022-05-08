@@ -6,13 +6,14 @@
 * This module implements the functions run the main state machine
 * \author Filipe Loureiro & Miguel Silva
 * \date 08/05/22
-* \version 1.5
+* \version 1.6
 * \bug No bugs found
 */
 
 #ifndef _STATE_H
 #define _STATE_H
 
+#include "base.h"
 #include "button.h"
 #include "gpio.h"
 
@@ -51,6 +52,15 @@ const float prices={0.5,1.0,1.5}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Private Member Functions
+
+void read_events();
+int cred_state();
+int browse_state();
+int error_substate();
+int return_substate();
+int money_substate();
+int changeprod_substate();
+int outprod_subtate();
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Public Member Function
