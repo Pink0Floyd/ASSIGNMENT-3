@@ -4,54 +4,16 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Private Member Functions
 
-int up_subevent()
+void read_events()
 {
-	
-}
-
-int down_subevent()
-{
-	
-}
-
-int EUD_event()
-{
-	
-}
-
-int sel_event()
-{
-	
-}
-
-int ret_event()
-{
-	
-}
-
-int e10_subevent()
-{
-
-}
-
-int e20_subevent()
-{
-
-}
-
-int e50_subevent()
-{
-
-}
-
-int e100_subevent()
-{
-
-}
-
-int EX_event()
-{
-	
+	up=read_button1();
+	down=read_button3();
+	sel=read_button2();
+	ret=read_button4();
+	e10=read_button5();
+	e20=read_button6();
+	e50=read_button7();
+	e100=read_button8();
 }
 
 int credit_state()
@@ -60,7 +22,11 @@ int credit_state()
 	
 	while(1)
 	{
-		if(
+		if(SEL_event()==1)
+		{
+			next_state=PRINT_ERROR;
+		}
+
 	}
 
 	return next_state;
