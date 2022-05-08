@@ -6,7 +6,7 @@
 * This module implements the functions run the main state machine
 * \author Filipe Loureiro & Miguel Silva
 * \date 08/05/22
-* \version 1.6
+* \version 1.7
 * \bug No bugs found
 */
 
@@ -14,7 +14,7 @@
 #define _STATE_H
 
 #include "base.h"
-#include "button.h"
+#include "buttons.h"
 #include "gpio.h"
 
 #define NO_STATE 0
@@ -46,21 +46,21 @@ static int e100=0;
 
 static int error_code=0;
 
-static float money=0;
+static int money=0;
 static int product=300;
-const float prices={0.5,1.0,1.5}
+const static double prices[3]={50,100,150};
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Private Member Functions
 
-void read_events();
-int cred_state();
-int browse_state();
-int error_substate();
-int return_substate();
-int money_substate();
-int changeprod_substate();
-int outprod_subtate();
+//void read_events();
+//int cred_state();
+//int browse_state();
+//int error_substate();
+//int return_substate();
+//int money_substate();
+//int changeprod_substate();
+//int outprod_subtate();
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Public Member Function

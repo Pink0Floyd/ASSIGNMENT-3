@@ -6,27 +6,28 @@
 
 void read_events()
 {
-	up=read_button1();
-	down=read_button3();
-	sel=read_button2();
-	ret=read_button4();
-	e10=read_button5();
-	e20=read_button6();
-	e50=read_button7();
-	e100=read_button8();
+	up=read_buttons(1);
+	down=read_buttons(3);
+	sel=read_buttons(2);
+	ret=read_buttons(4);
+	e10=read_buttons(5);
+	e20=read_buttons(6);
+	e50=read_buttons(7);
+	e100=read_buttons(8);
+	//k_msleep(10);
 }
 
 int cred_state()
 {
-	printk("CRED: %f credit available\n",money);
+	printk("CRED: %i cents creditted\n",money);
 
-	int next_state=NO_STATE;
-	while(next_state==NO_STATE)
+	int next_state=CRED;
+	while(next_state==CRED)
 	{
 		read_events();
-		if(up+down!=0)
+		if((up+down)!=0)
 		{
-			next_state=DISP_PROD;
+			next_state=BROWSE;
 		}
 		else if(sel!=0)
 		{
@@ -45,13 +46,9 @@ int cred_state()
 				next_state=RETURN;
 			}
 		}
-		else if(e10+e20+e50+e100)!=0)
+		else if((e10+e20+e50+e100)!=0)
 		{
 			next_state=MONEY;
-		}
-		else
-		{
-			next_state=NO_STATE;
 		}
 	}
 
@@ -76,8 +73,8 @@ int browse_state()
 			break;
 	}
 
-	int next_state=NO_STATE;
-	while(next_state==NO_STATE)
+	int next_state=BROWSE;
+	while(next_state==BROWSE)
 	{
 		read_events();
 		if(up+down!=0)
@@ -112,10 +109,6 @@ int browse_state()
 		{
 			next_state=MONEY;
 		}
-		else
-		{
-			next_state=NO_STATE;
-		}
 	}
 
 	return next_state;
@@ -123,8 +116,6 @@ int browse_state()
 
 int error_substate()
 {
-	int next_state=CREDIT;
-
 	switch(error_code)
 	{
 		case ERROR_NO_SEL:
@@ -149,7 +140,7 @@ int error_substate()
 
 int return_substate()
 {
-	printk("RETURN: Returned %f euros to the user\n",money);
+	printk("RETURN: Returned %i cents to the user\n",money);
 	money=0;
 
 	return CRED;
@@ -160,22 +151,22 @@ int money_substate()
 	if(e10!=0)
 	{
 		printk("MONEY: Increased credit by 10 cents\n");
-		money+=0.1;
+		money+=10;
 	}
 	else if(e20!=0)
 	{
 		printk("MONEY: Increased credit by 20 cents\n");
-		money+=0.2;
+		money+=20;
 	}
 	else if(e50!=0)
 	{
 		printk("MONEY: Increased credit by 50 cents\n");
-		money+=0.5;
+		money+=50;
 	}
 	else if(e100!=0)
 	{
 		printk("MONEY: Increased credit by 1 euro\n");
-		money+=1.0;
+		money+=100;
 	}
 
 	return CRED;
@@ -197,21 +188,21 @@ int changeprod_substate()
 	return BROWSE;
 }
 
-int outprod_subtate()
+int outprod_substate()
 {
 	switch(product%N_PROD)
 	{
 		case COFFEE:
 			printk("OUT_PROD: Dispensed a Coffee\n");
-			money-=0.5;
+			money-=50;
 			break;
 		case TUNA:
 			printk("OUT_PROD: Dispensed a Tuna Sandwich\n");
-			money-=1.0;
+			money-=100;
 			break;
 		case BEER:
 			printk("OUT_PROD: Dispensed a Beer\n");
-			money-=1.5;
+			money-=150;
 			break;
 	}
 
@@ -226,14 +217,14 @@ int state_machine(int state)
 	int next_state=NO_STATE;
 	switch(state)
 	{
-		case CREDIT:
-			next_state=credit_state();
+		case CRED:
+			next_state=cred_state();
 			break;
 		case BROWSE:
 			next_state=browse_state();
 			break;
-		case PRINT_ERROR:
-			next_state=printerror_substate();
+		case ERROR:
+			next_state=error_substate();
 			break;
 		case RETURN:
 			next_state=return_substate();
@@ -241,8 +232,8 @@ int state_machine(int state)
 		case MONEY:
 			next_state=money_substate();
 			break;
-		case DISPLAY_PROD:
-			next_state=displayprod_substate();
+		case CHANGE_PROD:
+			next_state=changeprod_substate();
 			break;
 		case OUT_PROD:
 			next_state=outprod_substate();

@@ -24,7 +24,7 @@
 #define BUTTON8 29                                          // BUTTON8 pin number of GPIO_0
 
 #define N_BUTTONS 8					    // Number of buttons
-#define TIME_SLEEP 20
+#define TIME_SLEEP 50
 
 const static int buttons_pin[8]={BUTTON1,BUTTON2,BUTTON3,BUTTON4,BUTTON5,BUTTON6,BUTTON7,BUTTON8};    // Buttons data with pins numbers             
 const static int buttons_pos[8]={1,2,4,8,16,32,64,128};						      // Buttons data with corresponding position 

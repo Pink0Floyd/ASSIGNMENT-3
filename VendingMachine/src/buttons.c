@@ -75,7 +75,6 @@ void buttons_init(struct device *gpio0_dev, char n_buttons)                     
 void buttons_init_(struct device *gpio0_dev, char n_buttons, char c)
 {
   buttons_init(gpio0_dev,n_buttons);
-  printk("Inicializar interrupts\n\r");
   int ret=0;
   int i=0;
     
@@ -85,7 +84,6 @@ void buttons_init_(struct device *gpio0_dev, char n_buttons, char c)
     {
       if((n_buttons & buttons_pos[i]) == buttons_pos[i])
       {
-        printk("%d\n\r",buttons_pos[i]);
         ret=gpio_pin_interrupt_configure(gpio0_dev, buttons_pin[i], GPIO_INT_EDGE_TO_ACTIVE);         // Button rising edge interrupt configuration 
         if (ret < 0)                                                                                  // In case of fail initialization and consequent error message
         { 
@@ -157,7 +155,7 @@ void buttons_callback_init(struct device *gpio0_dev, char n_buttons)
       {
 	    gpio_init_callback(&but5_cb_data, but5_cbfunction, BIT(BUTTON5));
 	    gpio_add_callback(gpio0_dev, &but5_cb_data);
-      }
+	}
       if((n_buttons & 32) == 32)
       {
 	    gpio_init_callback(&but6_cb_data, but6_cbfunction, BIT(BUTTON6));
@@ -178,14 +176,14 @@ void buttons_callback_init(struct device *gpio0_dev, char n_buttons)
 // Read Buttons Flags:
 int read_buttons(int button)
 {
-
       switch (button)
-      case 1:
-	    if(but1_flag==1)
-	    {	    
-            	    k_msleep(TIME_SLEEP);  
-            	    but1_flag=0;
-            	    return 1;
+	{
+		case 1:
+		if(but1_flag==1)
+		{	    
+			k_msleep(TIME_SLEEP);  
+            	but1_flag=0;
+            	return 1;
             }
             else 
             {
@@ -193,7 +191,7 @@ int read_buttons(int button)
             	    return 0;
             }
 	    break;
-      
+     
       case 2:
       
 	    if(but2_flag==1)
@@ -208,7 +206,7 @@ int read_buttons(int button)
 		  return 0;
             }
 	    break;
-      
+     
      case 3:
       
 	    if(but3_flag==1)
@@ -223,7 +221,6 @@ int read_buttons(int button)
             	    return 0;
             }
 	    break;
-
       case 4:
       
 	    if(but4_flag==1)
@@ -238,7 +235,6 @@ int read_buttons(int button)
             	    return 0;
             }
 	    break;
-
       case 5:
       
 	    if(but5_flag==1)
@@ -253,7 +249,6 @@ int read_buttons(int button)
             	    return 0;
             }
 	    break;
-
       case 6:
       
 	    if(but6_flag==1)
@@ -268,7 +263,6 @@ int read_buttons(int button)
             	    return 0;
             }
 	    break;
-
       case 7:
       
 	    if(but7_flag==1)
@@ -282,7 +276,7 @@ int read_buttons(int button)
             	    k_msleep(TIME_SLEEP);  
             	    return 0;
             }
-      
+      break;
       case 8:
       
 	     if(but8_flag==1)
@@ -296,9 +290,11 @@ int read_buttons(int button)
             	    k_msleep(TIME_SLEEP);  
             	    return 0;
             }
-     
+     break;
       default:
 	    printk("Wrong argument for read_buttons\n\r");
+	    break;
+	    }
 }
 
 // Reset Buttons Flags:
