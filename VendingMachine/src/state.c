@@ -16,17 +16,42 @@ void read_events()
 	e100=read_button8();
 }
 
-int credit_state()
+int cred_state()
 {
-	int next_state=0;
+	int next_state=NO_STATE;
 	
-	while(1)
+	while(next_state==NO_STATE)
 	{
-		if(SEL_event()==1)
+		read_events();
+		if(up+down!=0)
 		{
-			next_state=PRINT_ERROR;
+			next_state=DISP_PROD;
 		}
-
+		else if(sel!=0)
+		{
+			next_state=ERROR;
+			error_code=ERROR_NO_SEL;
+		}
+		else if(ret!=0)
+		{
+			if(money==0)
+			{
+				next_state=ERROR;
+				error_code=ERROR_NO_RET;
+			}
+			else
+			{
+				next_state=RETURN;
+			}
+		}
+		else if(e10+e20+e50+e100)!=0)
+		{
+			next_state=MONEY;
+		}
+		else
+		{
+			next_state=NO_STATE;
+		}
 	}
 
 	return next_state;
@@ -34,12 +59,54 @@ int credit_state()
 
 int browse_state()
 {
-	int next_state=0;
+	int next_state=NO_STATE;
+	float cost=0;
+
+	while(next_state==NO_STATE)
+	{
+		read_events();
+		if(up+down!=0)
+		{
+			next_state=CHANGE_PROD;
+		}
+		else if(sel!=0)
+		{
+			if(money>=prices[product%N_PROD])
+			{
+				next_state=OUT_PROD;
+			}
+			else
+			{
+				next_state=ERROR;
+				error_code=ERROR_NO_MONEY;
+			}
+		}
+		else if(ret!=0)
+		{
+			if(money==0)
+			{
+				next_state=ERROR;
+				error_code=ERROR_NO_RET;
+			}
+			else
+			{
+				next_state=RETURN;
+			}
+		}
+		else if(e10+e20+e50+e100!=0)
+		{
+			next_state=MONEY;
+		}
+		else
+		{
+			next_state=NO_STATE;
+		}
+	}
 
 	return next_state;
 }
 
-int printerror_substate()
+int error_substate()
 {
 	int next_state=CREDIT;
 
@@ -48,26 +115,19 @@ int printerror_substate()
 
 int return_substate()
 {
-	int next_state=DISPLAY_CREDIT;
-
-	return next_state;
-}
-
-int displaycredit_substate()
-{
-	int next_state=CREDIT;
+	int next_state=DISP_CREDIT;
 
 	return next_state;
 }
 
 int money_substate()
 {
-	int next_state=DISPLAY_CREDIT;
+	int next_state=DISP_CREDIT;
 
 	return next_state;
 }
 
-int displayprod_substate()
+int changeprod_substate()
 {
 	int next_state=BROWSE;
 
@@ -76,7 +136,7 @@ int displayprod_substate()
 
 int outprod_subtate()
 {
-	int next_state=DISPLAY_CREDIT;
+	int next_state=DISP_CREDIT;
 
 	return next_state;
 }
