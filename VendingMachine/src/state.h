@@ -6,7 +6,7 @@
 * This module implements the functions run the main state machine
 * \author Filipe Loureiro & Miguel Silva
 * \date 08/05/22
-* \version 1.4
+* \version 1.5
 * \bug No bugs found
 */
 
@@ -46,7 +46,7 @@ static int e100=0;
 static int error_code=0;
 
 static float money=0;
-static int product=0;
+static int product=300;
 const float prices={0.5,1.0,1.5}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

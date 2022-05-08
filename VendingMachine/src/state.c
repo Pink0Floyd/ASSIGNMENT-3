@@ -110,12 +110,34 @@ int error_substate()
 {
 	int next_state=CREDIT;
 
+	switch(error_code)
+	{
+		case ERROR_NO_SEL:
+			printk("ERROR: No product has been selected\n");
+			error_code=0;
+			break;
+		case ERROR_NO_RET:
+			printk("ERROR: There is no credit to be returned\n");
+			error_code=0;
+			break;
+		case ERROR_NO_MONEY:
+			printk("ERROR: There isn't enouph credit to make the purchase\n");
+			error_code=0;
+			break;
+		default:
+			printk("ERROR: Unknown Error\n");
+			break;
+	}
+
 	return next_state;
 }
 
 int return_substate()
 {
 	int next_state=DISP_CREDIT;
+
+	printk("RETURN: Returned %f euros to the user\n",money);
+	money=0;
 
 	return next_state;
 }
@@ -124,6 +146,27 @@ int money_substate()
 {
 	int next_state=DISP_CREDIT;
 
+	if(e10!=0)
+	{
+		printk("MONEY: Increased credit by 10 cents\n");
+		money+=0.1;
+	}
+	else if(e20!=0)
+	{
+		printk("MONEY: Increased credit by 20 cents\n");
+		money+=0.2;
+	}
+	else if(e50!=0)
+	{
+		printk("MONEY: Increased credit by 50 cents\n");
+		money+=0.5;
+	}
+	else if(e100!=0)
+	{
+		printk("MONEY: Increased credit by 1 euro\n");
+		money+=1.0;
+	}
+
 	return next_state;
 }
 
@@ -131,12 +174,39 @@ int changeprod_substate()
 {
 	int next_state=BROWSE;
 
+	if(up!=0)
+	{
+		printk("CHANGE_PROD: Next prod\n");
+		product++;
+	}
+	else if(down!=0)
+	{
+		printk("CHANGE_PROD: Previous prod\n");
+		product--;
+	}
+
 	return next_state;
 }
 
 int outprod_subtate()
 {
 	int next_state=DISP_CREDIT;
+
+	switch(product%N_PROD)
+	{
+		case COFFEE:
+			printk("OUT_PROD: Dispensed a Coffee\n");
+			money-=0.5;
+			break;
+		case TUNA:
+			printk("OUT_PROD: Dispensed a Tuna Sandwich\n");
+			money-=1.0;
+			break;
+		case BEER:
+			printk("OUT_PROD: Dispensed a Beer\n");
+			money-=1.5;
+			break;
+	}
 
 	return next_state;
 }
