@@ -3,50 +3,50 @@
 // Calback Functions:
 void but1_cbfunction(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
  {
-      but1_flag=1;										      // Update Flag 
-      but2_flag=0; but3_flag=0; but4_flag=0; but5_flag=0; but6_flag=0; but7_flag=0; but8_flag=0;      // Turn off others flags                                   
+      reset_flags();
+      but1_flag=1;										      // Update Flag                               
  } 
 
  void but2_cbfunction(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
  {
-      but2_flag=1;										      // Update Flag 
-      but1_flag=0; but3_flag=0; but4_flag=0; but5_flag=0; but6_flag=0; but7_flag=0; but8_flag=0;      // Turn off others flags    
+      reset_flags();
+      but2_flag=1;										      // Update     
  } 
 
  void but3_cbfunction(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
  {
+      reset_flags();
       but3_flag=1;										      // Update Flag 
-      but1_flag=0; but2_flag=0; but4_flag=0; but5_flag=0; but6_flag=0; but7_flag=0; but8_flag=0;      // Turn off others flags  
  } 
 
  void but4_cbfunction(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
     {
+      reset_flags();
       but4_flag=1;										      // Update Flag
-      but1_flag=0; but2_flag=0; but3_flag=0; but5_flag=0; but6_flag=0; but7_flag=0; but8_flag=0;      // Turn off others flags 
     } 
 
 void but5_cbfunction(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
     {
+      reset_flags();
       but5_flag=1;										      // Update Flag
-      but1_flag=0; but2_flag=0; but3_flag=0; but4_flag=0; but6_flag=0; but7_flag=0; but8_flag=0;      // Turn off others flags
     }
 
  void but6_cbfunction(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
     {
+      reset_flags();
       but6_flag=1;										      // Update Flag
-      but1_flag=0; but2_flag=0; but3_flag=0; but4_flag=0; but5_flag=0; but7_flag=0; but8_flag=0;      // Turn off others flags
     }
 
 void but7_cbfunction(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
     {
+      reset_flags();
       but7_flag=1;										      // Update Flag
-      but1_flag=0; but2_flag=0; but3_flag=0; but4_flag=0; but5_flag=0; but6_flag=0; but8_flag=0;      // Turn off others flags
     }
   
 void but8_cbfunction(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
     {
+      reset_flags();
       but8_flag=1;										      // Update Flag
-      but1_flag=0; but2_flag=0; but3_flag=0; but4_flag=0; but5_flag=0; but6_flag=0; but7_flag=0;      // Turn off others flags
     }
 
 
@@ -160,7 +160,7 @@ void buttons_callback_init(struct device *gpio0_dev, char n_buttons)
       }
       if((n_buttons & 32) == 32)
       {
-	    gpio_init_callback(&but6_cb_data, but4_cbfunction, BIT(BUTTON6));
+	    gpio_init_callback(&but6_cb_data, but6_cbfunction, BIT(BUTTON6));
 	    gpio_add_callback(gpio0_dev, &but6_cb_data);
       }
       if((n_buttons & 64) == 64)
@@ -179,12 +179,14 @@ void buttons_callback_init(struct device *gpio0_dev, char n_buttons)
 int read_button1()
 {     
       if(but1_flag==1)
-      {
+      {	    
+	    k_msleep(TIME_SLEEP);  
 	    but1_flag=0;
 	    return 1;
       }
       else 
       {
+	    k_msleep(TIME_SLEEP);  
 	    return 0;
       }
 }
@@ -193,11 +195,13 @@ int read_button2()
 {
       if(but2_flag==1)
       {
+	    k_msleep(TIME_SLEEP);  
 	    but2_flag=0;
 	    return 1;
       }
       else 
       {
+	    k_msleep(TIME_SLEEP);  
 	    return 0;
       }
 }
@@ -206,11 +210,13 @@ int read_button3()
 {
       if(but3_flag==1)
       {
+	    k_msleep(TIME_SLEEP);  
 	    but3_flag=0;
 	    return 1;
       }
       else 
       {
+	    k_msleep(TIME_SLEEP);  
 	    return 0;
       }
 }
@@ -219,11 +225,13 @@ int read_button4()
 {
       if(but4_flag==1)
       {
+	    k_msleep(TIME_SLEEP);  
 	    but4_flag=0;
 	    return 1;
       }
       else 
       {
+	    k_msleep(TIME_SLEEP);  
 	    return 0;
       }
 }
@@ -232,11 +240,13 @@ int read_button5()
 {
       if(but5_flag==1)
       {
+	    k_msleep(TIME_SLEEP);  
 	    but5_flag=0;
 	    return 1;
       }
       else 
       {
+	    k_msleep(TIME_SLEEP);  
 	    return 0;
       }
 }
@@ -245,11 +255,13 @@ int read_button6()
 {
       if(but6_flag==1)
       {
+	    k_msleep(TIME_SLEEP);  
 	    but6_flag=0;
 	    return 1;
       }
       else 
       {
+	    k_msleep(TIME_SLEEP);  
 	    return 0;
       }
 }
@@ -258,11 +270,13 @@ int read_button7()
 {
       if(but7_flag==1)
       {
+	    k_msleep(TIME_SLEEP);  
 	    but7_flag=0;
 	    return 1;
       }
       else 
       {
+	    k_msleep(TIME_SLEEP);  
 	    return 0;
       }
 }
@@ -271,11 +285,13 @@ int read_button8()
 {
       if(but8_flag==1)
       {
+	    k_msleep(TIME_SLEEP);  
 	    but8_flag=0;
 	    return 1;
       }
       else 
       {
+	    k_msleep(TIME_SLEEP);  
 	    return 0;
       }
 }
@@ -291,7 +307,7 @@ void reset_flags()
       but5_flag=0; 
       but6_flag=0; 
       but7_flag=0; 
-      but8_flag=0;      
+      but8_flag=0;    
 }
 
 /*

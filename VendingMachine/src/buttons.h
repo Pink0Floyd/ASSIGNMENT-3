@@ -28,6 +28,7 @@
 #define BUTTON8 29                                          // BUTTON8 pin number of GPIO_0
 
 #define N_BUTTONS 8					    // Number of buttons
+#define TIME_SLEEP 20
 
 const static int buttons_pin[8]={BUTTON1,BUTTON2,BUTTON3,BUTTON4,BUTTON5,BUTTON6,BUTTON7,BUTTON8};     // Buttons data with pins numbers             
 const static int buttons_pos[8]={1,2,4,8,16,32,64,128};						      // Buttons data with corresponding position 
@@ -85,6 +86,21 @@ void buttons_init(struct device *gpio0_dev, char n_buttons);
 */
 void buttons_init_(struct device *gpio0_dev, char n_buttons, char c);
 
+
+/**
+* \brief Read Buttons Flags
+*
+* Return the current flag button state
+*
+* \author Filipe Loureiro & Miguel Silva
+* \param [IN] struct device *gpio0  -> the pointer for gpio0 struct
+* \param [IN] char n_buttons        -> byte corresponding to the buttons to activate
+* \param [IN] char c                -> 'H' or 'h' to interrupt at rising edge
+                                    -> 'L' or 'l' to interrupt at falling edge
+                                    -> 'B' or 'b' to interrupt at both edges
+* \date 25/04/22
+* \bug Currently under tests, and continuous updating
+*/
 int read_button1();
 int read_button2();
 int read_button3();
