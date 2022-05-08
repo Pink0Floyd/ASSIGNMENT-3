@@ -175,6 +175,220 @@ void buttons_callback_init(struct device *gpio0_dev, char n_buttons)
       }
 }
 
+// Read Buttons Flags:
+int read_buttons(int button)
+{
+
+      switch (button)
+      case 1:
+	    if(but1_flag==1)
+	    {	    
+            	    k_msleep(TIME_SLEEP);  
+            	    but1_flag=0;
+            	    return 1;
+            }
+            else 
+            {
+            	    k_msleep(TIME_SLEEP);  
+            	    return 0;
+            }
+	    break;
+      
+      case 2:
+      
+	    if(but2_flag==1)
+	    {
+            	    k_msleep(TIME_SLEEP);  
+            	    but2_flag=0;
+            	    return 1;
+	    }
+            else 
+            {
+		  k_msleep(TIME_SLEEP);  
+		  return 0;
+            }
+	    break;
+      
+     case 3:
+      
+	    if(but3_flag==1)
+            {
+            	    k_msleep(TIME_SLEEP);  
+            	    but3_flag=0;
+            	    return 1;
+            }
+            else 
+            {
+            	    k_msleep(TIME_SLEEP);  
+            	    return 0;
+            }
+	    break;
+
+      case 4:
+      
+	    if(but4_flag==1)
+            {
+            	    k_msleep(TIME_SLEEP);  
+            	    but4_flag=0;
+            	    return 1;
+            }
+            else 
+            {
+            	    k_msleep(TIME_SLEEP);  
+            	    return 0;
+            }
+	    break;
+
+      case 5:
+      
+	    if(but5_flag==1)
+            {
+            	    k_msleep(TIME_SLEEP);  
+            	    but5_flag=0;
+            	    return 1;
+            }
+            else 
+            {
+            	    k_msleep(TIME_SLEEP);  
+            	    return 0;
+            }
+	    break;
+
+      case 6:
+      
+	    if(but6_flag==1)
+            {
+            	    k_msleep(TIME_SLEEP);  
+            	    but6_flag=0;
+            	    return 1;
+            }
+            else 
+            {
+            	    k_msleep(TIME_SLEEP);  
+            	    return 0;
+            }
+	    break;
+
+      case 7:
+      
+	    if(but7_flag==1)
+            {
+            	    k_msleep(TIME_SLEEP);  
+            	    but7_flag=0;
+            	    return 1;
+            }
+            else 
+            {
+            	    k_msleep(TIME_SLEEP);  
+            	    return 0;
+            }
+      
+      case 8:
+      
+	     if(but8_flag==1)
+            {
+            	    k_msleep(TIME_SLEEP);  
+            	    but8_flag=0;
+            	    return 1;
+            }
+            else 
+            {
+            	    k_msleep(TIME_SLEEP);  
+            	    return 0;
+            }
+     
+      default:
+	    printk("Wrong argument for read_buttons\n\r");
+}
+
+// Reset Buttons Flags:
+void reset_flags()
+{
+      but1_flag=0;										      
+      but2_flag=0; 
+      but3_flag=0; 
+      but4_flag=0; 
+      but5_flag=0; 
+      but6_flag=0; 
+      but7_flag=0; 
+      but8_flag=0;    
+}
+
+/*
+// Several Buttons Callbacks, that are necessary for good interrupt use
+
+    // Set Button 1 callback 
+    gpio_init_callback(&but1_cb_data, but1_cbfunction, BIT(BUTTON1));
+    gpio_add_callback(gpio0_dev, &but1_cb_data);
+
+    // Set Button 2 callback 
+    gpio_init_callback(&but2_cb_data, but2_cbfunction, BIT(BUTTON2));
+    gpio_add_callback(gpio0_dev, &but2_cb_data);
+
+    // Set Button 3 callback 
+    gpio_init_callback(&but3_cb_data, but3_cbfunction, BIT(BUTTON3));
+    gpio_add_callback(gpio0_dev, &but3_cb_data);
+
+    // Set Button 4 callback 
+    gpio_init_callback(&but4_cb_data, but4_cbfunction, BIT(BUTTON4));
+    gpio_add_callback(gpio0_dev, &but4_cb_data);
+ 
+ */
+  
+/*
+void button1_init(struct device *gpio0_dev)                                                         // Button 1                 
+{
+  int ret=0;
+
+  ret=gpio_pin_configure(gpio0_dev, BUTTON1, GPIO_INPUT | GPIO_PULL_UP);                            // Button pin configuration as input and internal pull-up resistor
+  if (ret < 0)                                                                                      // In case of fail initialization and consequent error message
+  {
+    printk("Error %d: Failed to configure BUTTON 1 \n\r", ret);
+    return;
+  }
+}
+
+
+void button2_init(struct device *gpio0_dev)                                                         // Button 2
+{
+  int ret=0;
+
+  ret=gpio_pin_configure(gpio0_dev, BUTTON2, GPIO_INPUT | GPIO_PULL_UP);                            // Button pin configuration as input and internal pull-up resistor
+  if (ret < 0)                                                                                      // In case of fail initialization and consequent error message
+  {
+    printk("Error %d: Failed to configure BUTTON 2 \n\r", ret);
+    return;
+  }
+}
+
+
+void button3_init(struct device *gpio0_dev)                                                         // Button 3
+{
+  int ret=0;
+
+  ret=gpio_pin_configure(gpio0_dev, BUTTON3, GPIO_INPUT | GPIO_PULL_UP);                            // Button pin configuration as input and internal pull-up resistor
+  if (ret < 0)                                                                                      // In case of fail initialization and consequent error message
+  {
+    printk("Error %d: Failed to configure BUTTON 3 \n\r", ret);
+    return;
+  }
+}
+
+
+void button4_init(struct device *gpio0_dev)                                                         // Button 4
+{
+  int ret=0;
+
+  ret=gpio_pin_configure(gpio0_dev, BUTTON4, GPIO_INPUT | GPIO_PULL_UP);                            // Button pin configuration as input and internal pull-up resistor
+  if (ret < 0)                                                                                      // In case of fail initialization and consequent error message
+  {
+    printk("Error %d: Failed to configure BUTTON 4 \n\r", ret);
+    return;
+  }
+}
+*/
+
+/*
 // Read Buttons Functions:
 int read_button1()
 {     
@@ -296,90 +510,4 @@ int read_button8()
       }
 }
 
-
-// Reset Buttons Flags:
-void reset_flags()
-{
-      but1_flag=0;										      
-      but2_flag=0; 
-      but3_flag=0; 
-      but4_flag=0; 
-      but5_flag=0; 
-      but6_flag=0; 
-      but7_flag=0; 
-      but8_flag=0;    
-}
-
-/*
-// Several Buttons Callbacks, that are necessary for good interrupt use
-
-    // Set Button 1 callback 
-    gpio_init_callback(&but1_cb_data, but1_cbfunction, BIT(BUTTON1));
-    gpio_add_callback(gpio0_dev, &but1_cb_data);
-
-    // Set Button 2 callback 
-    gpio_init_callback(&but2_cb_data, but2_cbfunction, BIT(BUTTON2));
-    gpio_add_callback(gpio0_dev, &but2_cb_data);
-
-    // Set Button 3 callback 
-    gpio_init_callback(&but3_cb_data, but3_cbfunction, BIT(BUTTON3));
-    gpio_add_callback(gpio0_dev, &but3_cb_data);
-
-    // Set Button 4 callback 
-    gpio_init_callback(&but4_cb_data, but4_cbfunction, BIT(BUTTON4));
-    gpio_add_callback(gpio0_dev, &but4_cb_data);
- 
- */
-  
-/*
-void button1_init(struct device *gpio0_dev)                                                         // Button 1                 
-{
-  int ret=0;
-
-  ret=gpio_pin_configure(gpio0_dev, BUTTON1, GPIO_INPUT | GPIO_PULL_UP);                            // Button pin configuration as input and internal pull-up resistor
-  if (ret < 0)                                                                                      // In case of fail initialization and consequent error message
-  {
-    printk("Error %d: Failed to configure BUTTON 1 \n\r", ret);
-    return;
-  }
-}
-
-
-void button2_init(struct device *gpio0_dev)                                                         // Button 2
-{
-  int ret=0;
-
-  ret=gpio_pin_configure(gpio0_dev, BUTTON2, GPIO_INPUT | GPIO_PULL_UP);                            // Button pin configuration as input and internal pull-up resistor
-  if (ret < 0)                                                                                      // In case of fail initialization and consequent error message
-  {
-    printk("Error %d: Failed to configure BUTTON 2 \n\r", ret);
-    return;
-  }
-}
-
-
-void button3_init(struct device *gpio0_dev)                                                         // Button 3
-{
-  int ret=0;
-
-  ret=gpio_pin_configure(gpio0_dev, BUTTON3, GPIO_INPUT | GPIO_PULL_UP);                            // Button pin configuration as input and internal pull-up resistor
-  if (ret < 0)                                                                                      // In case of fail initialization and consequent error message
-  {
-    printk("Error %d: Failed to configure BUTTON 3 \n\r", ret);
-    return;
-  }
-}
-
-
-void button4_init(struct device *gpio0_dev)                                                         // Button 4
-{
-  int ret=0;
-
-  ret=gpio_pin_configure(gpio0_dev, BUTTON4, GPIO_INPUT | GPIO_PULL_UP);                            // Button pin configuration as input and internal pull-up resistor
-  if (ret < 0)                                                                                      // In case of fail initialization and consequent error message
-  {
-    printk("Error %d: Failed to configure BUTTON 4 \n\r", ret);
-    return;
-  }
-}
 */
