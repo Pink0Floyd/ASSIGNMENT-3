@@ -1,4 +1,3 @@
-
 /**
 * \file state.h
 * \brief State Machine Implementation
@@ -65,6 +64,16 @@ const static double prices[3]={50,100,150};
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Public Member Function
 
+/**
+* \brief State Machine Function
+*
+* Runs all the internal states of the state machine
+*
+* \param [IN] state		    -> Initial State
+*
+* \date 25/04/22
+* \bug No bugs detected
+*/
 int state_machine(int state);
 
 #endif

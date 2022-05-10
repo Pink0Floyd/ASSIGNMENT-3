@@ -1,11 +1,11 @@
 /**
 * \file gpio.h
-* \brief Buttons functions
+* \brief Buttons Functions
 *
-* This module implements the functions to initialize and use the built in board buttons
+* This module implements the functions to initialise and use 4 built in board buttons and 4 external buttons
 * \author Filipe Loureiro & Miguel Silva
 * \date 26/04/22
-* \version 1.3
+* \version 1.4
 * \bug Currently under tests, and continuous updating
 */
 
@@ -52,7 +52,7 @@ static int but8_flag = 0;						      // Callback variable, flag to signal a BUTT
 //  Public Functions:
 
 /**
-* \brief Built in Buttons initialization function without interrupts
+* \brief Built in and External Buttons initialization function without interrupts
 *
 * Initializes the board buttons by using a byte for these porpouse, button 1 match to byte=1, button 2 match to byte=2, ect
 *
@@ -60,13 +60,13 @@ static int but8_flag = 0;						      // Callback variable, flag to signal a BUTT
 * \param [IN] char n_buttons        -> byte corresponding to the buttons to activate
 *
 * \date 25/04/22
-* \bug Currently under tests, and continuous updating
+* \bug No bugs detected
 */
 void buttons_init(struct device *gpio0_dev, char n_buttons);
 
 
 /**
-* \brief Built in Buttons initialization function with interrupts
+* \brief Built in and External Buttons initialization function with interrupts
 *
 * Initializes the board buttons by using a byte for these porpouse, button 1 match to byte=1, button 2 match to byte=2, ect
 *
@@ -77,7 +77,7 @@ void buttons_init(struct device *gpio0_dev, char n_buttons);
                                     -> 'B' or 'b' to interrupt at both edges
 *
 * \date 25/04/22
-* \bug Currently under tests, and continuous updating
+* \bug No bugs detected
 */
 void buttons_init_(struct device *gpio0_dev, char n_buttons, char c);
 
@@ -90,14 +90,15 @@ void buttons_init_(struct device *gpio0_dev, char n_buttons, char c);
 * \param [IN] int button	    -> the button number for read the flag 
 *
 * \date 8/05/22
-* \bug Currently under tests, and continuous updating
+* \bug No bugs detected
 */
 int read_buttons(int button);
+
 
 ///////////////////////////////////////////////////////////////////////////////////////
 //  Private Functions:
 
-void buttons_callback_init(struct device *gpio0_dev,char n_buttons);
-void reset_flags();
+// void buttons_callback_init(struct device *gpio0_dev,char n_buttons);
+// void reset_flags();
 
 #endif

@@ -5,14 +5,9 @@
 * This module implements the functions to initialize and do some gpio configuration
 * \author Filipe Loureiro & Miguel Silva
 * \date 25/04/22
-* \version 0.1
-* \bug Currently under tests, and continuous updating
+* \version 1.0
+* \bug No bugs detected
 */
-
-/* OBSERVATION:
-* This module will suffer many updates due to the newness that this board brings to us
-*/
-
 
 #ifndef _GPIO_H
 #define _GPIO_H
@@ -27,23 +22,22 @@
 *
 * Initializes the GPIO 0 in order to use it pins
 *
-* \author Filipe Loureiro & Miguel Silva
 * \return Return a pointer to a device struct type
 * \date 25/04/22
-* \bug Currently under tests, and continuous updating
+* \bug No bugs detected
 */
 
 struct device *gpio0_init();
+
 
 /**
 * \brief GPIO 1 initialization function
 *
 * Initializes the GPIO 1 in order to use it pins
 *
-* \author Filipe Loureiro & Miguel Silva
 * \return Return a pointer to a struct of device type
 * \date 25/04/22
-* \bug Currently under tests, and continuous updating
+* \bug No bugs detected
 */
 struct device *gpio1_init();
 

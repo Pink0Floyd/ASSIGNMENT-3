@@ -1,11 +1,11 @@
-/*  
+/**
 * \file base.h
 * \brief This file contain the basic includes and variables for general porpouse
 *
 * \author Filipe Loureiro & Miguel Silva
 * \date 08/05/22
-* \version 1.1
-* \bug Currently under tests, and continuous updating
+* \version 1.2
+* \bug No bugs detected
 */
 
 #ifndef _BASE_H
@@ -21,10 +21,5 @@
 #include <timing/timing.h>
 #include <stdio.h>
 #include <stdint.h>
-
-#define LED1 13                                             // LED1 pin number of GPIO_0
-#define LED2 14                                             // LED2 pin number of GPIO_0
-#define LED3 15                                             // LED3 pin number of GPIO_0
-#define LED4 16                                             // LED4 pin number of GPIO_0
 
 #endif

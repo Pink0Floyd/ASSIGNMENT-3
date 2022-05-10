@@ -1,11 +1,11 @@
-/**
+/*
 * \file gpio.h
 * \brief Builtin LEDs functions
 *
 * This module implements the functions to initialize and configurate the 4 built in board leds, LEDS are Active LOW
 * \author Filipe Loureiro & Miguel Silva
 * \date 25/04/22
-* \version 0.2
+* \version 1.0
 * \bug Currently under tests, and continuous updating
 */
 
@@ -18,6 +18,12 @@
 #define _LEDS_H
 
 #include "base.h"
+
+
+#define LED1 13                                             // LED1 pin number of GPIO_0
+#define LED2 14                                             // LED2 pin number of GPIO_0
+#define LED3 15                                             // LED3 pin number of GPIO_0
+#define LED4 16                                             // LED4 pin number of GPIO_0
 
 static int leds_pin[4]={LED1,LED2,LED3,LED4};                                        // Leds data with pins numbers             
 static int leds_pos[4]={1,2,4,8};                                                    // Leds data with corresponding position, acording to the functions char led 
