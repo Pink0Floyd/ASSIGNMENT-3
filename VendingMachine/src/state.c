@@ -26,12 +26,11 @@ int cred_state()
 		read_events();
 		if((up+down)!=0)
 		{
-			next_state=BROWSE;
+			next_state=CHANGE_PROD;
 		}
 		else if(sel!=0)
 		{
-			next_state=ERROR;
-			error_code=ERROR_NO_SEL;
+			next_state=BROWSE;
 		}
 		else if(ret!=0)
 		{
@@ -117,10 +116,6 @@ int error_substate()
 {
 	switch(error_code)
 	{
-		case ERROR_NO_SEL:
-			printk("ERROR: No product has been selected\n");
-			error_code=0;
-			break;
 		case ERROR_NO_RET:
 			printk("ERROR: There is no credit to be returned\n");
 			error_code=0;
@@ -176,12 +171,26 @@ int changeprod_substate()
 	if(up!=0)
 	{
 		printk("CHANGE_PROD: Next prod\n");
-		product++;
+		if(product==2)
+		{
+			product=0;
+		}
+		else
+		{
+			product++;
+		}
 	}
 	else if(down!=0)
 	{
 		printk("CHANGE_PROD: Previous prod\n");
-		product--;
+		if(product==0)
+		{
+			product=2;
+		}
+		else
+		{
+			product--;
+		}
 	}
 
 	return BROWSE;
