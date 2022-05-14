@@ -31,14 +31,14 @@ void read_events()
 	e100=read_buttons(8);
 }
 
-void credit_state_action(int money_amount)
+void display_credit_state_action(int money_amount)
 {
 	printk("CREDIT: %i cents creditted\n",money_amount);
 }
 
-int credit_state_exit()
+int display_credit_state_exit()
 {
-	int next_state=CREDIT;
+	int next_state=DISPLAY_CREDIT;
 	read_events();
 	if((up+down)!=0)
 	{
@@ -46,7 +46,7 @@ int credit_state_exit()
 	}
 	else if(sel!=0)
 	{
-		next_state=BROWSE;
+		next_state=DISPLAY_PRODUCT;
 	}
 	else if(ret!=0)
 	{
@@ -67,19 +67,18 @@ int credit_state_exit()
 	return next_state;
 }
 
-int credit_state()
+int display_credit_state()
 {
-	credit_state_action(money);
-
-	int next_state=CREDIT;
-	while(next_state==CREDIT)
+	display_credit_state_action(money);
+	int next_state=DISPLAY_CREDIT;
+	while(next_state==DISPLAY_CREDIT)
 	{
-		next_state=credit_state_exit();
+		next_state=display_credit_state_exit();
 	}
 	return next_state;
 }
 
-void browse_state_action(int selected_product)
+void display_product_state_action(int selected_product)
 {
 	switch(selected_product)
 	{
@@ -98,9 +97,9 @@ void browse_state_action(int selected_product)
 	}
 }
 
-int browse_state_exit()
+int display_product_state_exit()
 {
-	int next_state=BROWSE;
+	int next_state=DISPLAY_PRODUCT;
 	read_events();
 	if(up+down!=0)
 	{
@@ -137,13 +136,13 @@ int browse_state_exit()
 	return next_state;
 }
 
-int browse_state()
+int display_product_state()
 {
-	int next_state=BROWSE;
-	browse_state_action(product);
-	while(next_state==BROWSE)
+	int next_state=DISPLAY_PRODUCT;
+	display_product_state_action(product);
+	while(next_state==DISPLAY_PRODUCT)
 	{
-		next_state=browse_state_exit();
+		next_state=display_product_state_exit();
 	}
 	return next_state;
 }
@@ -165,7 +164,7 @@ int error_substate()
 			break;
 	}
 
-	return CREDIT;
+	return DISPLAY_CREDIT;
 }
 
 int change_credit_substate()
@@ -191,7 +190,7 @@ int change_credit_substate()
 		money+=100;
 	}
 
-	return CREDIT;
+	return DISPLAY_CREDIT;
 }
 
 int return_credit_substate()
@@ -199,7 +198,7 @@ int return_credit_substate()
 	printk("RETURN_CREDIT: Returned %i cents to the user\n",money);
 	money=0;
 
-	return CREDIT;
+	return DISPLAY_CREDIT;
 }
 
 int change_product_substate()
@@ -232,7 +231,7 @@ int change_product_substate()
 	}
 	cost=price[product];
 
-	return BROWSE;
+	return DISPLAY_PRODUCT;
 }
 
 int return_product_substate()
@@ -253,7 +252,7 @@ int return_product_substate()
 			break;
 	}
 
-	return CREDIT;
+	return DISPLAY_CREDIT;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -264,11 +263,11 @@ int state_machine(int state)
 	int next_state=NO_STATE;
 	switch(state)
 	{
-		case CREDIT:
-			next_state=credit_state();
+		case DISPLAY_CREDIT:
+			next_state=display_credit_state();
 			break;
-		case BROWSE:
-			next_state=browse_state();
+		case DISPLAY_PRODUCT:
+			next_state=display_product_state();
 			break;
 		case ERROR:
 			next_state=error_substate();

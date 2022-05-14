@@ -17,8 +17,8 @@
 #include "gpio.h"
 
 #define NO_STATE 0
-#define BROWSE 1
-#define CREDIT 2
+#define DISPLAY_PRODUCT 1
+#define DISPLAY_CREDIT 2
 #define ERROR 3
 #define RETURN_CREDIT 4
 #define CHANGE_CREDIT 5
