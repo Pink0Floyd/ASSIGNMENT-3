@@ -18,12 +18,12 @@
 
 #define NO_STATE 0
 #define BROWSE 1
-#define CRED 2
+#define CREDIT 2
 #define ERROR 3
-#define RETURN 4
-#define MONEY 5
-#define OUT_PROD 6
-#define CHANGE_PROD 7
+#define RETURN_CREDIT 4
+#define CHANGE_CREDIT 5
+#define RETURN_PRODUCT 6
+#define CHANGE_PRODUCT 7
 
 #define ERROR_NO_RET 2
 #define ERROR_NO_MONEY 3 
@@ -37,26 +37,30 @@
 // Private Member Functions
 
 //void read_events();
-//int cred_state();
+//void credit_state_action(int money_amount);
+//int credit_state_exit();
+//int credit_state();
+//void browse_state_action(int product_selected);
+//int browse_state_exit();
 //int browse_state();
 //int error_substate();
-//int return_substate();
-//int money_substate();
-//int changeprod_substate();
-//int outprod_subtate();
+//int change_credit_substate();
+//int return_credit_substate();
+//int change_product_substate();
+//int return_product_subtate();
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Public Member Function
 
 /**
-* \brief State Machine Function
+*\brief State Machine Function
 *
 * Runs all the internal states of the state machine
 *
-* \param [IN] state		    -> Initial State
-*
-* \date 25/04/22
-* \bug No bugs detected
+*\param [IN] current state
+*\return next state
+*\date 25/04/22
+*\bug No bugs detected
 */
 int state_machine(int state);
 

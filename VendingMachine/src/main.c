@@ -8,18 +8,16 @@
 
 void main()
 {
-	printk("\n\n\n\n\n\nStart\n");
-	const struct device *gpio0_dev;
-      gpio0_dev=gpio0_init();
-      printk("End of gpio0 initialization\n\r");              // Debbug line
-  
-      buttons_init_(gpio0_dev,255,'h');
-      printk("The Buttons are Active\n\r");
+	printk("\n\n\nStart\n");
+//	const struct device *gpio0_dev;
+//      gpio0_dev=gpio0_init();
+//      buttons_init_(gpio0_dev,255,'h');
+	buttons_init_(gpio0_init(),255,'h');
 	int state=INITIAL_STATE;
-	
-	while(state!=0)
+	while(state!=NO_STATE)
 	{
 		state=state_machine(state);
 	}
-	state=state_machine(state);  
+	state=state_machine(state);
+	printk("PROGRAM ENDED\n\n\n");
 }

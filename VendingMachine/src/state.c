@@ -13,7 +13,8 @@ static int error_code=0;
 
 static int money=0;
 static int product=0;
-const static double prices[3]={50,100,150};
+static int cost=0;
+const static int price[3]={50,100,150};
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Private Member Functions
@@ -28,21 +29,20 @@ void read_events()
 	e20=read_buttons(6);
 	e50=read_buttons(7);
 	e100=read_buttons(8);
-	//k_msleep(10);
 }
 
-void cred_state_action()
+void credit_state_action(int money_amount)
 {
-	printk("CRED: %i cents creditted\n",money);
+	printk("CREDIT: %i cents creditted\n",money_amount);
 }
 
-int cred_state_exit()
+int credit_state_exit()
 {
-	int next_state=CRED;
+	int next_state=CREDIT;
 	read_events();
 	if((up+down)!=0)
 	{
-		next_state=CHANGE_PROD;
+		next_state=CHANGE_PRODUCT;
 	}
 	else if(sel!=0)
 	{
@@ -57,39 +57,40 @@ int cred_state_exit()
 		}
 		else
 		{
-			next_state=RETURN;
+			next_state=RETURN_CREDIT;
 		}
 	}
 	else if((e10+e20+e50+e100)!=0)
 	{
-		next_state=MONEY;
-	}
-}
-
-int cred_state()
-{
-	cred_state_action();
-
-	int next_state=CRED;
-	while(next_state=CRED)
-	{
-		next_state=cred_state_exit()
+		next_state=CHANGE_CREDIT;
 	}
 	return next_state;
 }
 
-void browse_state_action()
+int credit_state()
 {
-	switch(product%N_PROD)
+	credit_state_action(money);
+
+	int next_state=CREDIT;
+	while(next_state==CREDIT)
+	{
+		next_state=credit_state_exit();
+	}
+	return next_state;
+}
+
+void browse_state_action(int selected_product)
+{
+	switch(selected_product)
 	{
 		case COFFEE:
-			printk("BROWSE: Selected a Coffee\n");
+			printk("BROWSE: Selected a Coffee with a cost of %i cents\n",cost);
 			break;
 		case TUNA:
-			printk("BROWSE: Selected a Tuna Sandwich\n");
+			printk("BROWSE: Selected a Tuna Sandwich with a cost of %i cents\n",cost);
 			break;
 		case BEER:
-			printk("BROWSE: Selected a Beer\n");
+			printk("BROWSE: Selected a Beer with a cost of %i cents\n",cost);
 			break;
 		default:
 			printk("BROWSE: Selected an Unknown Product\n");
@@ -99,16 +100,17 @@ void browse_state_action()
 
 int browse_state_exit()
 {
+	int next_state=BROWSE;
 	read_events();
 	if(up+down!=0)
 	{
-		next_state=CHANGE_PROD;
+		next_state=CHANGE_PRODUCT;
 	}
 	else if(sel!=0)
 	{
-		if(money>=prices[product%N_PROD])
+		if(money>=cost)
 		{
-			next_state=OUT_PROD;
+			next_state=RETURN_PRODUCT;
 		}
 		else
 		{
@@ -125,18 +127,20 @@ int browse_state_exit()
 		}
 		else
 		{
-			next_state=RETURN;
+			next_state=RETURN_CREDIT;
 		}
 	}
 	else if(e10+e20+e50+e100!=0)
 	{
-		next_state=MONEY;
+		next_state=CHANGE_CREDIT;
 	}
+	return next_state;
 }
 
 int browse_state()
 {
 	int next_state=BROWSE;
+	browse_state_action(product);
 	while(next_state==BROWSE)
 	{
 		next_state=browse_state_exit();
@@ -161,48 +165,48 @@ int error_substate()
 			break;
 	}
 
-	return CRED;
+	return CREDIT;
 }
 
-int return_substate()
-{
-	printk("RETURN: Returned %i cents to the user\n",money);
-	money=0;
-
-	return CRED;
-}
-
-int money_substate()
+int change_credit_substate()
 {
 	if(e10!=0)
 	{
-		printk("MONEY: Increased credit by 10 cents\n");
+		printk("CHANGE_CREDIT: Increased credit by 10 cents\n");
 		money+=10;
 	}
 	else if(e20!=0)
 	{
-		printk("MONEY: Increased credit by 20 cents\n");
+		printk("CHANGE_CREDIT: Increased credit by 20 cents\n");
 		money+=20;
 	}
 	else if(e50!=0)
 	{
-		printk("MONEY: Increased credit by 50 cents\n");
+		printk("CHANGE_CREDIT: Increased credit by 50 cents\n");
 		money+=50;
 	}
 	else if(e100!=0)
 	{
-		printk("MONEY: Increased credit by 1 euro\n");
+		printk("CHANGE_CREDIT: Increased credit by 1 euro\n");
 		money+=100;
 	}
 
-	return CRED;
+	return CREDIT;
 }
 
-int changeprod_substate()
+int return_credit_substate()
+{
+	printk("RETURN_CREDIT: Returned %i cents to the user\n",money);
+	money=0;
+
+	return CREDIT;
+}
+
+int change_product_substate()
 {
 	if(up!=0)
 	{
-		printk("CHANGE_PROD: Next prod\n");
+		printk("CHANGE_PRODUCT: Next prod\n");
 		if(product==2)
 		{
 			product=0;
@@ -211,10 +215,11 @@ int changeprod_substate()
 		{
 			product++;
 		}
+		up=0;
 	}
 	else if(down!=0)
 	{
-		printk("CHANGE_PROD: Previous prod\n");
+		printk("CHANGE_PRODUCT: Previous prod\n");
 		if(product==0)
 		{
 			product=2;
@@ -223,30 +228,32 @@ int changeprod_substate()
 		{
 			product--;
 		}
+		down=0;
 	}
+	cost=price[product];
 
 	return BROWSE;
 }
 
-int outprod_substate()
+int return_product_substate()
 {
 	switch(product%N_PROD)
 	{
 		case COFFEE:
-			printk("OUT_PROD: Dispensed a Coffee\n");
+			printk("RETURN_PRODUCT: Dispensed a Coffee\n");
 			money-=50;
 			break;
 		case TUNA:
-			printk("OUT_PROD: Dispensed a Tuna Sandwich\n");
+			printk("RETURN_PRODUCT: Dispensed a Tuna Sandwich\n");
 			money-=100;
 			break;
 		case BEER:
-			printk("OUT_PROD: Dispensed a Beer\n");
+			printk("RETURN_PRODUCT: Dispensed a Beer\n");
 			money-=150;
 			break;
 	}
 
-	return CRED;
+	return CREDIT;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -257,8 +264,8 @@ int state_machine(int state)
 	int next_state=NO_STATE;
 	switch(state)
 	{
-		case CRED:
-			next_state=cred_state();
+		case CREDIT:
+			next_state=credit_state();
 			break;
 		case BROWSE:
 			next_state=browse_state();
@@ -266,17 +273,17 @@ int state_machine(int state)
 		case ERROR:
 			next_state=error_substate();
 			break;
-		case RETURN:
-			next_state=return_substate();
+		case CHANGE_CREDIT:
+			next_state=change_credit_substate();
 			break;
-		case MONEY:
-			next_state=money_substate();
+		case RETURN_CREDIT:
+			next_state=return_credit_substate();
 			break;
-		case CHANGE_PROD:
-			next_state=changeprod_substate();
+		case CHANGE_PRODUCT:
+			next_state=change_product_substate();
 			break;
-		case OUT_PROD:
-			next_state=outprod_substate();
+		case RETURN_PRODUCT:
+			next_state=return_product_substate();
 			break;	
 		default:
 			printk("Unknown State\n");
