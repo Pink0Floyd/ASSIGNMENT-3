@@ -33,21 +33,6 @@
 #define BEER 2
 #define N_PROD 3
 
-static int up=0;
-static int down=0;
-static int sel=0;
-static int ret=0;
-static int e10=0;
-static int e20=0;
-static int e50=0;
-static int e100=0;
-
-static int error_code=0;
-
-static int money=0;
-static int product=0;
-const static double prices[3]={50,100,150};
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Private Member Functions
 
