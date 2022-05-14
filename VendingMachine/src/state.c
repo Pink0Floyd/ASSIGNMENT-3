@@ -1,5 +1,20 @@
 #include "state.h"
 
+static int up=0;
+static int down=0;
+static int sel=0;
+static int ret=0;
+static int e10=0;
+static int e20=0;
+static int e50=0;
+static int e100=0;
+
+static int error_code=0;
+
+static int money=0;
+static int product=0;
+const static double prices[3]={50,100,150};
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Private Member Functions
 
@@ -16,45 +31,54 @@ void read_events()
 	//k_msleep(10);
 }
 
-int cred_state()
+void cred_state_action()
 {
 	printk("CRED: %i cents creditted\n",money);
+}
 
+int cred_state_exit()
+{
 	int next_state=CRED;
-	while(next_state==CRED)
+	read_events();
+	if((up+down)!=0)
 	{
-		read_events();
-		if((up+down)!=0)
-		{
-			next_state=BROWSE;
-		}
-		else if(sel!=0)
+		next_state=CHANGE_PROD;
+	}
+	else if(sel!=0)
+	{
+		next_state=BROWSE;
+	}
+	else if(ret!=0)
+	{
+		if(money==0)
 		{
 			next_state=ERROR;
-			error_code=ERROR_NO_SEL;
+			error_code=ERROR_NO_RET;
 		}
-		else if(ret!=0)
+		else
 		{
-			if(money==0)
-			{
-				next_state=ERROR;
-				error_code=ERROR_NO_RET;
-			}
-			else
-			{
-				next_state=RETURN;
-			}
-		}
-		else if((e10+e20+e50+e100)!=0)
-		{
-			next_state=MONEY;
+			next_state=RETURN;
 		}
 	}
+	else if((e10+e20+e50+e100)!=0)
+	{
+		next_state=MONEY;
+	}
+}
 
+int cred_state()
+{
+	cred_state_action();
+
+	int next_state=CRED;
+	while(next_state=CRED)
+	{
+		next_state=cred_state_exit()
+	}
 	return next_state;
 }
 
-int browse_state()
+void browse_state_action()
 {
 	switch(product%N_PROD)
 	{
@@ -71,45 +95,52 @@ int browse_state()
 			printk("BROWSE: Selected an Unknown Product\n");
 			break;
 	}
+}
 
+int browse_state_exit()
+{
+	read_events();
+	if(up+down!=0)
+	{
+		next_state=CHANGE_PROD;
+	}
+	else if(sel!=0)
+	{
+		if(money>=prices[product%N_PROD])
+		{
+			next_state=OUT_PROD;
+		}
+		else
+		{
+			next_state=ERROR;
+			error_code=ERROR_NO_MONEY;
+		}
+	}
+	else if(ret!=0)
+	{
+		if(money==0)
+		{
+			next_state=ERROR;
+			error_code=ERROR_NO_RET;
+		}
+		else
+		{
+			next_state=RETURN;
+		}
+	}
+	else if(e10+e20+e50+e100!=0)
+	{
+		next_state=MONEY;
+	}
+}
+
+int browse_state()
+{
 	int next_state=BROWSE;
 	while(next_state==BROWSE)
 	{
-		read_events();
-		if(up+down!=0)
-		{
-			next_state=CHANGE_PROD;
-		}
-		else if(sel!=0)
-		{
-			if(money>=prices[product%N_PROD])
-			{
-				next_state=OUT_PROD;
-			}
-			else
-			{
-				next_state=ERROR;
-				error_code=ERROR_NO_MONEY;
-			}
-		}
-		else if(ret!=0)
-		{
-			if(money==0)
-			{
-				next_state=ERROR;
-				error_code=ERROR_NO_RET;
-			}
-			else
-			{
-				next_state=RETURN;
-			}
-		}
-		else if(e10+e20+e50+e100!=0)
-		{
-			next_state=MONEY;
-		}
+		next_state=browse_state_exit();
 	}
-
 	return next_state;
 }
 
@@ -117,10 +148,6 @@ int error_substate()
 {
 	switch(error_code)
 	{
-		case ERROR_NO_SEL:
-			printk("ERROR: No product has been selected\n");
-			error_code=0;
-			break;
 		case ERROR_NO_RET:
 			printk("ERROR: There is no credit to be returned\n");
 			error_code=0;
@@ -176,12 +203,26 @@ int changeprod_substate()
 	if(up!=0)
 	{
 		printk("CHANGE_PROD: Next prod\n");
-		product++;
+		if(product==2)
+		{
+			product=0;
+		}
+		else
+		{
+			product++;
+		}
 	}
 	else if(down!=0)
 	{
 		printk("CHANGE_PROD: Previous prod\n");
-		product--;
+		if(product==0)
+		{
+			product=2;
+		}
+		else
+		{
+			product--;
+		}
 	}
 
 	return BROWSE;

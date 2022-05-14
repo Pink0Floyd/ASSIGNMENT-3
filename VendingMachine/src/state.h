@@ -4,8 +4,8 @@
 *
 * This module implements the functions run the main state machine
 * \author Filipe Loureiro & Miguel Silva
-* \date 08/05/22
-* \version 1.7
+* \date 14/05/22
+* \version 1.8
 * \bug No bugs found
 */
 
@@ -25,7 +25,6 @@
 #define OUT_PROD 6
 #define CHANGE_PROD 7
 
-#define ERROR_NO_SEL 1
 #define ERROR_NO_RET 2
 #define ERROR_NO_MONEY 3 
 
@@ -33,21 +32,6 @@
 #define TUNA 1
 #define BEER 2
 #define N_PROD 3
-
-static int up=0;
-static int down=0;
-static int sel=0;
-static int ret=0;
-static int e10=0;
-static int e20=0;
-static int e50=0;
-static int e100=0;
-
-static int error_code=0;
-
-static int money=0;
-static int product=300;
-const static double prices[3]={50,100,150};
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Private Member Functions
