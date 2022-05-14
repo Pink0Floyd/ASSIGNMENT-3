@@ -5,7 +5,7 @@
 * This module implements the functions run the main state machine
 * \author Filipe Loureiro & Miguel Silva
 * \date 14/05/22
-* \version 1.8
+* \version 1.9
 * \bug No bugs found
 */
 
@@ -59,7 +59,6 @@
 *
 *\param [IN] current state
 *\return next state
-*\date 25/04/22
 *\bug No bugs detected
 */
 int state_machine(int state);
