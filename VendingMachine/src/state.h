@@ -2,10 +2,10 @@
 * \file state.h
 * \brief State Machine Implementation
 *
-* This module implements the functions run the main state machine
+* This module implements the functions that run the main state machine
 * \author Filipe Loureiro & Miguel Silva
 * \date 14/05/22
-* \version 1.9
+* \version 1.10
 * \bug No bugs found
 */
 
