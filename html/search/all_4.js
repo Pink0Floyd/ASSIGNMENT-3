@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['state_2eh_0',['state.h',['../state_8h.html',1,'']]],
-  ['state_5fmachine_1',['state_machine',['../state_8h.html#aaea2976fb4cf2f407bcc6369a15174d6',1,'state.c']]]
+  ['read_5fbuttons_0',['read_buttons',['../buttons_8h.html#a2f74a3110c0859e2b3a146bceafb0c07',1,'buttons.c']]]
 ];

@@ -1,4 +1,4 @@
-/*
+/**
 * \file leds.h
 * \brief Builtin LEDs functions
 *
