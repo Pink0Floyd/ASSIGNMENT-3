@@ -1,12 +1,12 @@
 /*
-* \file gpio.h
+* \file leds.h
 * \brief Builtin LEDs functions
 *
 * This module implements the functions to initialize and configurate the 4 built in board leds, LEDS are Active LOW
 * \author Filipe Loureiro & Miguel Silva
-* \date 25/04/22
-* \version 1.0
-* \bug Currently under tests, and continuous updating
+* \date 17/05/22
+* \version 1.1
+* \bug No bugs found
 */
 
 /* OBSERVATION:

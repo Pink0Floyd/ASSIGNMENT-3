@@ -4,8 +4,8 @@
 *
 * This module implements the functions that run the main state machine
 * \author Filipe Loureiro & Miguel Silva
-* \date 14/05/22
-* \version 1.10
+* \date 17/05/22
+* \version 1.11
 * \bug No bugs found
 */
 
@@ -16,7 +16,7 @@
 #include "buttons.h"
 #include "gpio.h"
 
-#define NO_STATE 0
+#define NO_STATE 0		///< Crash State
 #define DISPLAY_PRODUCT 1
 #define DISPLAY_CREDIT 2
 #define ERROR 3

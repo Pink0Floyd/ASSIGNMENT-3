@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">State Machine<span id="projectnumber">&#160;1.0</span>
+   <div id="projectname">State Machine<span id="projectnumber">&#160;1.2</span>
    </div>
    <div id="projectbrief">We developed a state machine for SETR Classs</div>
   </td>
@@ -70,7 +70,7 @@ $(function() {
   <div class="headertitle"><div class="title">buttons.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<a href="buttons_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#ifndef _BUTTONS_H</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#define _BUTTONS_H</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
@@ -80,12 +80,12 @@ $(function() {
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#define BUTTON2 12                                          </span><span class="comment">// BUTTON2 pin number of GPIO_0</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#define BUTTON3 24                                          </span><span class="comment">// BUTTON3 pin number of GPIO_0</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#define BUTTON4 25                                          </span><span class="comment">// BUTTON4 pin number of GPIO_0</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#define BUTTON5 03                      </span><span class="comment">// BUTTON5 pin number of GPIO_0</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#define BUTTON6 04                      </span><span class="comment">// BUTTON6 pin number of GPIO_0</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#define BUTTON5 03                          </span><span class="comment">// BUTTON5 pin number of GPIO_0</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#define BUTTON6 04                          </span><span class="comment">// BUTTON6 pin number of GPIO_0</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#define BUTTON7 28                                          </span><span class="comment">// BUTTON7 pin number of GPIO_0</span></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#define BUTTON8 29                                          </span><span class="comment">// BUTTON8 pin number of GPIO_0</span></div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#define N_BUTTONS 8                     </span><span class="comment">// Number of buttons</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#define N_BUTTONS 8                         </span><span class="comment">// Number of buttons</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#define TIME_SLEEP 50</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">const</span> <span class="keyword">static</span> <span class="keywordtype">int</span> buttons_pin[8]={BUTTON1,BUTTON2,BUTTON3,BUTTON4,BUTTON5,BUTTON6,BUTTON7,BUTTON8};    <span class="comment">// Buttons data with pins numbers             </span></div>
@@ -112,13 +112,13 @@ $(function() {
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">//  Public Functions:</span></div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keywordtype">void</span> buttons_init(<span class="keyword">struct</span> device *gpio0_dev, <span class="keywordtype">char</span> n_buttons);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keywordtype">void</span> <a class="code hl_function" href="buttons_8h.html#aeb7e5807a0cc1d6c7c565d5ad0ef1afe">buttons_init</a>(<span class="keyword">struct</span> device *gpio0_dev, <span class="keywordtype">char</span> n_buttons);</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="keywordtype">void</span> buttons_init_(<span class="keyword">struct</span> device *gpio0_dev, <span class="keywordtype">char</span> n_buttons, <span class="keywordtype">char</span> c);</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="keywordtype">void</span> <a class="code hl_function" href="buttons_8h.html#a2868fccdde2cf6fc44fbbd66649c818e">buttons_init_</a>(<span class="keyword">struct</span> device *gpio0_dev, <span class="keywordtype">char</span> n_buttons, <span class="keywordtype">char</span> c);</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="keywordtype">int</span> read_buttons(<span class="keywordtype">int</span> button);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="keywordtype">int</span> <a class="code hl_function" href="buttons_8h.html#a2f74a3110c0859e2b3a146bceafb0c07">read_buttons</a>(<span class="keywordtype">int</span> button);</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">//  Private Functions:</span></div>
@@ -128,6 +128,9 @@ $(function() {
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="abase_8h_html"><div class="ttname"><a href="base_8h.html">base.h</a></div><div class="ttdoc">This file contain the basic includes and variables for general porpouse.</div></div>
+<div class="ttc" id="abuttons_8h_html_a2868fccdde2cf6fc44fbbd66649c818e"><div class="ttname"><a href="buttons_8h.html#a2868fccdde2cf6fc44fbbd66649c818e">buttons_init_</a></div><div class="ttdeci">void buttons_init_(struct device *gpio0_dev, char n_buttons, char c)</div><div class="ttdoc">Built in and External Buttons initialization function with interrupts.</div><div class="ttdef"><b>Definition:</b> buttons.c:76</div></div>
+<div class="ttc" id="abuttons_8h_html_a2f74a3110c0859e2b3a146bceafb0c07"><div class="ttname"><a href="buttons_8h.html#a2f74a3110c0859e2b3a146bceafb0c07">read_buttons</a></div><div class="ttdeci">int read_buttons(int button)</div><div class="ttdoc">Read Buttons Flags.</div><div class="ttdef"><b>Definition:</b> buttons.c:178</div></div>
+<div class="ttc" id="abuttons_8h_html_aeb7e5807a0cc1d6c7c565d5ad0ef1afe"><div class="ttname"><a href="buttons_8h.html#aeb7e5807a0cc1d6c7c565d5ad0ef1afe">buttons_init</a></div><div class="ttdeci">void buttons_init(struct device *gpio0_dev, char n_buttons)</div><div class="ttdoc">Built in and External Buttons initialization function without interrupts.</div><div class="ttdef"><b>Definition:</b> buttons.c:55</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

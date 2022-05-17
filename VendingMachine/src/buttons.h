@@ -1,12 +1,12 @@
 /**
-* \file gpio.h
+* \file buttons.h
 * \brief Buttons Functions
 *
 * This module implements the functions to initialise and use 4 built in board buttons and 4 external buttons
 * \author Filipe Loureiro & Miguel Silva
-* \date 26/04/22
+* \date 17/05/22
 * \version 1.4
-* \bug Currently under tests, and continuous updating
+* \bug No bugs found
 */
 
 #ifndef _BUTTONS_H

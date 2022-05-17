@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['gpio0_5finit_0',['gpio0_init',['../gpio_8h.html#a8828a44e473538e641ed7b46e8865ff4',1,'gpio.c']]],
-  ['gpio1_5finit_1',['gpio1_init',['../gpio_8h.html#a7317be393b66555435ebdfe099a33606',1,'gpio.c']]]
+  ['buttons_5finit_0',['buttons_init',['../buttons_8h.html#aeb7e5807a0cc1d6c7c565d5ad0ef1afe',1,'buttons.c']]],
+  ['buttons_5finit_5f_1',['buttons_init_',['../buttons_8h.html#a2868fccdde2cf6fc44fbbd66649c818e',1,'buttons.c']]]
 ];

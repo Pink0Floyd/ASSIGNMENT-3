@@ -4,8 +4,8 @@
 *
 * This module implements the functions to initialize and do some gpio configuration
 * \author Filipe Loureiro & Miguel Silva
-* \date 25/04/22
-* \version 1.0
+* \date 17/05/22
+* \version 1.1
 * \bug No bugs detected
 */
 
